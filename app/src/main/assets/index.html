@@ -1,65 +1,123 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login Form</title>
+    <title>Login Page</title>
     <style>
+    form {
+      margin-bottom: 10px;
+    }
+
     .form-row {
       margin-bottom: 10px;
     }
 
-    label {
-      display: inline-block;
-      width: 120px;
-      font-weight: bold;
+    .book-list {
+      list-style-type: none;
+      padding: 0;
     }
 
-    input[type="text"],
-    select {
-      padding: 5px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+    .book-list li {
+      margin-bottom: 10px;
     }
 
-    button {
-      padding: 8px 12px;
-      background-color: #4caf50;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
+    .book-link {
       cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .confirmation-message {
+      display: none;
+      color: green;
+      font-style: italic;
+    }
+
+    .success-icon {
+      display: none;
+      color: green;
     }
   </style>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var loginForm = document.getElementById("loginForm");
+      var otpForm = document.getElementById("otpForm");
+      var bookDetailsForm = document.getElementById("bookDetailsForm");
+
+      loginForm.addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Perform any validation or processing if needed
+
+        // Hide the login form
+        loginForm.style.display = "none";
+
+        // Show the OTP form
+        otpForm.style.display = "block";
+      });
+
+      otpForm.addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Perform any validation or processing if needed
+
+        // Hide the OTP form
+        otpForm.style.display = "none";
+
+        // Show the book details form
+        bookDetailsForm.style.display = "block";
+      });
+
+      bookDetailsForm.addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Perform any validation or processing if needed
+
+        // Show the success icon and confirmation message for the selected books
+        var bookList = document.getElementsByClassName("show-message");
+        var confirmationMessages = document.getElementsByClassName("confirmation-message");
+        var successIcons = document.getElementsByClassName("success-icon");
+
+        for (var i = 0; i < bookList.length; i++) {
+          if (bookList[i].checked) {
+            confirmationMessages[i].style.display = "block";
+            successIcons[i].style.display = "inline";
+          }
+        }
+      });
+    });
+  </script>
 </head>
 <body>
+<h1>Login Page</h1>
+
 <form id="loginForm">
-    <div class="form-row">
-        <label for="name">Name:</label>
-        <input type="text" id="name" required>
-    </div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" required>
 
-    <div class="form-row">
-        <label for="mobile">Mobile Number:</label>
-        <input type="text" id="mobile" required>
-    </div>
+    <label for="mobile">Mobile Number:</label>
+    <input type="text" id="mobile" required>
 
-    <div class="form-row">
-        <label for="email">Email Id:</label>
-        <input type="text" id="email" required>
-    </div>
+    <label for="gender">Gender:</label>
+    <select id="gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+    </select>
 
-    <div class="form-row">
-        <label for="gender">Gender:</label>
-        <select id="gender">
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-        </select>
-    </div>
-
-    <div class="form-row">
-        <button type="button" id="loginButton">Login</button>
-    </div>
+    <button type="submit">Login</button>
 </form>
-</body>
-</html>
+
+<form id="otpForm" style="display: none;">
+    <label for="otp">Enter OTP:</label>
+    <input type="text" id="otp" required>
+
+    <button type="submit">Submit</button>
+</form>
+
+<form id="bookDetailsForm" style="display: none;">
+    <div class="form-row">
+        <label for="timeLimit">Time Limit (In mins):</label>
+        <input type="number" id="timeLimit" required>
+    </div>
+    <div class="form-row">
+        <label for="pageCount">Number of Pages
 

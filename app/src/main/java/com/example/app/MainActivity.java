@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
 //         mWebView.loadUrl("https://google.com");
 
         // LOCAL RESOURCE
-         mWebView.loadUrl("file:///android_asset/result.html");
+         mWebView.loadUrl("file:///android_asset/index.html");
     }
 
     @Override
